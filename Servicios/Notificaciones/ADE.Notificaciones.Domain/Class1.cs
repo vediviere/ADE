@@ -1,4 +1,4 @@
-﻿namespace ADE.Academico.Application
+﻿namespace ADE.Notificaciones.Domain
 {
     public class Class1
     {
