@@ -1,0 +1,15 @@
+<div class="dashboard">
+  <header>
+    <h1>ADE - Sistema Administrador Escolar</h1>
+    <div class="user-info">
+      <span>{{ auth.email() }}</span>
+      <span class="rol">{{ auth.rol() }}</span>
+      <button (click)="auth.logout()">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main>
+    <h2>Bienvenido, {{ auth.email() }}</h2>
+    <p>Módulos disponibles próximamente...</p>
+  </main>
+</div>

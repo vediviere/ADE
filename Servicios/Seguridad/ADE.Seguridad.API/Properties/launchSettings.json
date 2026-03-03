@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ADE.Seguridad.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:55293;http://localhost:55294"
+    }
+  }
+}

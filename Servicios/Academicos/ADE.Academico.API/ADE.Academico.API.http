@@ -1,0 +1,6 @@
+@ADE.Academico.API_HostAddress = http://localhost:5246
+
+GET {{ADE.Academico.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

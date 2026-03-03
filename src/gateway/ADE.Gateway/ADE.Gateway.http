@@ -1,0 +1,6 @@
+@ADE.Gateway_HostAddress = http://localhost:5258
+
+GET {{ADE.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
