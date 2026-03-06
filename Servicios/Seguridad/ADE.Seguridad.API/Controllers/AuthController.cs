@@ -37,6 +37,8 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
+        return StatusCode(501, new { mensaje = "Registro deshabilitado temporalmente. Solo Login (Ruta B)." });
+
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
