@@ -14,6 +14,7 @@ public interface IUsuarioRepository
     Task<Usuario?> GetByIdAsync(int id);
     Task<bool> ExisteEmailAsync(string email);
     Task<Usuario> CrearAsync(Usuario usuario);
+    Task ActualizarPasswordHashAsync(int idPersona, string newHash);
 }
 
 public interface IJwtService

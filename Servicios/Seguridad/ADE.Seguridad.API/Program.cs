@@ -2,6 +2,7 @@
 using ADE.Seguridad.Application.Services;
 using ADE.Seguridad.Domain.Entities;
 using ADE.Seguridad.Infrastructure.Data;
+using ADE.Seguridad.Infrastructure.Data.Scaffold;
 using ADE.Seguridad.Infrastructure.Repositories;
 using ADE.Seguridad.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,13 +14,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Root compartido (misma BD InMemory para todos los DbContext)
-builder.Services.AddSingleton<InMemoryDatabaseRoot>();
-
-builder.Services.AddDbContext<SeguridadDbContext>((sp, options) =>
+builder.Services.AddDbContext<AdeDbContext>(options =>
 {
-    var root = sp.GetRequiredService<InMemoryDatabaseRoot>();
-    options.UseInMemoryDatabase("SeguridadDb", root);
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SeguridadDb"));
 });
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -106,26 +103,5 @@ app.UseCors("AdePolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
-// ✅ MUY IMPORTANTE para InMemory: crea el modelo y aplica HasData
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<SeguridadDbContext>();
-    db.Database.EnsureCreated();
-
-    // ✅ por si HasData no se aplica como esperas, aseguramos roles manualmente
-    if (!db.Roles.Any())
-    {
-        db.Roles.AddRange(
-            new Rol { Id = 1, Nombre = "ADMIN" },
-            new Rol { Id = 2, Nombre = "DOCENTE" },
-            new Rol { Id = 3, Nombre = "ESTUDIANTE" },
-            new Rol { Id = 4, Nombre = "JEFATURA" }
-        );
-        db.SaveChanges();
-    }
-}
-
-//prueba
 
 app.Run();

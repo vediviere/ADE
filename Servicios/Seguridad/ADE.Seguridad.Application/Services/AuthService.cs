@@ -18,29 +18,15 @@ public class AuthService
     public async Task<TokenResponseDto?> LoginAsync(LoginDto dto)
     {
         var email = (dto.Email ?? string.Empty).Trim().ToLowerInvariant();
-        var passRaw = dto.Password ?? string.Empty;
+        var pass = (dto.Password ?? string.Empty).Trim();
 
         var usuario = await _usuarioRepo.GetByEmailAsync(email);
-
-        Console.WriteLine($"LOGIN email='{email}' encontrado={(usuario != null)}");
 
         if (usuario == null || !usuario.Activo)
             return null;
 
-        Console.WriteLine($"PASS raw='{passRaw}' len={passRaw.Length}");
-        Console.WriteLine($"PASS trim='{passRaw.Trim()}' len={passRaw.Trim().Length}");
-        Console.WriteLine($"HASH len={(usuario.PasswordHash?.Length ?? 0)}");
-        Console.WriteLine($"HASH='{usuario.PasswordHash}'");
-
-        // ✅ prueba 1: tal cual
-        var okRaw = BCrypt.Net.BCrypt.Verify(passRaw, usuario.PasswordHash);
-        // ✅ prueba 2: trim
-        var okTrim = BCrypt.Net.BCrypt.Verify(passRaw.Trim(), usuario.PasswordHash);
-
-        Console.WriteLine($"Verify raw={okRaw}  trim={okTrim}");
-
-        // usa el que funcione
-        if (!okRaw && !okTrim)
+        // ✅ Por ahora: BD guarda texto plano, comparamos directo
+        if ((usuario.PasswordHash ?? string.Empty) != pass)
             return null;
 
         var token = _jwtService.GenerarToken(usuario);
