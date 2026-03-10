@@ -4,9 +4,23 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography.Xml;
 using System.Text;
 
 namespace ADE.Seguridad.Infrastructure.Services;
+
+
+// 🐾 CAMINO DE MIGAJAS -- 6° SEXTA PARADA 🐾 Aquí se genera el token 🐾
+
+//Se transforman datos del usuario en claims
+//Se agregan email, rol e idPersona al token
+//aquí se firma el JWT
+
+// 🐾 CONTINUAMOS A LA SEPTIMA PARADA => Program 🐾
+
+
+// ❔❔❔❔ RECONFIGURACION DE TOKENS ❔❔❔❔❔ - SE NECESITA PENSARLO MEJOR
+
 
 public class JwtService : IJwtService
 {

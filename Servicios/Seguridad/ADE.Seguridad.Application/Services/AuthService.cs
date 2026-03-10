@@ -1,8 +1,21 @@
 ﻿using ADE.Seguridad.Application.DTOs;
 using ADE.Seguridad.Application.Interfaces;
 using ADE.Seguridad.Domain.Entities;
+using System.Diagnostics;
 
 namespace ADE.Seguridad.Application.Services;
+
+
+// 🐾 CAMINO DE MIGAJAS -- 2° SEGUNDA PARADA 🐾 Aquí vive la lógica del caso de uso. 🐾
+
+// 🐾 Aquí se procesa el login
+// 🐾 Se valida usuario activo
+// 🐾 Se valida contraseña
+// 🐾 Se pide generar el JWT
+// 🐾 Se arma la respuesta final
+
+
+// 🐾 CONTINUAMOS A LA TERCERA PARADA => IUsuarioRepository 🐾
 
 public class AuthService
 {

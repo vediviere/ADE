@@ -1,8 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace ADE.Seguridad.Infrastructure.Data.Scaffold;
+
+// 🐾 CAMINO DE MIGAJAS -- 5° QUINTA PARADA 🐾 Aquí está el puente con la base de datos. 🐾
+
+//Este contexto fue generado desde la BD de "ADE"
+//Representa las tablas del esquema "adedb"
+//Este contexto lo usa el repositorio para acceder a SQL Server
+
+// 🐾 CONTINUAMOS A LA SEXTA PARADA => JwtService 🐾
 
 public partial class AdeDbContext : DbContext
 {

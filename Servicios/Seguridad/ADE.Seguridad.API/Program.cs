@@ -12,6 +12,16 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
+// 🐾 CAMINO DE MIGAJAS -- 7° SEPTIMA PARADA 🐾 Aquí se configura todo el sistema 🐾
+
+//Se registra el DbContext
+//Se registran repositorios y servicios
+//Se configura JWT
+//Aquí se define CORS, Swagger y autorización
+
+// 🐾 CONTINUAMOS A LA SEPTIMA PARADA => Program 🐾
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AdeDbContext>(options =>

@@ -7,6 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ADE.Seguridad.API.Controllers;
 
+// 🐾 CAMINO DE MIGAJAS -- 1° PRIMERA PARADA 🐾 Aquí empieza el flujo desde HTTP. 🐾
+
+// 🐾 Este archivo es la puerta de entrada
+// 🐾 Aquí llegan login, register y endpoints protegidos
+// 🐾 El controller no resuelve lógica, solo recibe y delega
+
+// 🐾 CONTINUAMOS A LA SEGUNDA PARADA => AuthService 🐾
+
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
@@ -77,9 +85,10 @@ public class AuthController : ControllerBase
     [HttpGet("debug/usuarios")]
     public async Task<IActionResult> DebugUsuarios([FromServices] SeguridadDbContext db)
     {
-    
+
         var usuarios = await db.Usuarios
-        .Select(u => new {
+        .Select(u => new
+        {
             u.Id,
             u.Email,
             HashLen = u.PasswordHash.Length,
@@ -89,6 +98,6 @@ public class AuthController : ControllerBase
         })
         .ToListAsync();
 
-    return Ok(usuarios);
+        return Ok(usuarios);
     }
 }

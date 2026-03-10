@@ -2,8 +2,18 @@
 using ADE.Seguridad.Domain.Entities;
 using ADE.Seguridad.Infrastructure.Data.Scaffold;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Security.Cryptography.Xml;
 
 namespace ADE.Seguridad.Infrastructure.Repositories;
+
+// 🐾 CAMINO DE MIGAJAS -- 4° CUARTA PARADA 🐾 Aquí está la conexión real con datos. 🐾
+
+//Aquí se consulta "adedb.persona"
+//Se transforma una entidad de BD a un Usuario del dominio
+//Se traduce "id_rol" a nombre de rol
+
+// 🐾 CONTINUAMOS A LA QUINTA PARADA => AdeDbContext 🐾
 
 public class UsuarioRepository : IUsuarioRepository
 {
