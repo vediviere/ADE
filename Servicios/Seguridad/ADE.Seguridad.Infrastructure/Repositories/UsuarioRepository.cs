@@ -99,16 +99,6 @@ public class UsuarioRepository : IUsuarioRepository
             .AnyAsync(p => p.correo_inst.Trim().ToLower() == normalized);
     }
 
-    //public async Task<Usuario> CrearAsync(Usuario usuario)
-    //{
-    //    // ✅ Normaliza SIEMPRE antes de guardar (por si entra con espacios)
-    //    usuario.Email = (usuario.Email ?? string.Empty).Trim().ToLowerInvariant();
-
-    //    _context.roles_usuarios.Add(usuario);
-    //    await _context.SaveChangesAsync();
-    //    return usuario;
-    //}
-
     public async Task ActualizarPasswordHashAsync(int idPersona, string newHash)
     {
         var persona = await _context.personas.FirstOrDefaultAsync(p => p.id_persona == idPersona);

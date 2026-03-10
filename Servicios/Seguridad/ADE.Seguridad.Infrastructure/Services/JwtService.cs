@@ -10,6 +10,7 @@ using System.Text;
 namespace ADE.Seguridad.Infrastructure.Services;
 
 
+<<<<<<< HEAD
 // 🐾 CAMINO DE MIGAJAS -- 6° SEXTA PARADA 🐾 Aquí se genera el token 🐾
 
 //Se transforman datos del usuario en claims
@@ -22,6 +23,10 @@ namespace ADE.Seguridad.Infrastructure.Services;
 // ❔❔❔❔ RECONFIGURACION DE TOKENS ❔❔❔❔❔ - SE NECESITA PENSARLO MEJOR
 
 
+=======
+// ❔❔❔❔ RECONFIGURACION DE TOKENS ❔❔❔❔❔ - SE NECESITA PENSARLO MEJOR
+
+>>>>>>> 1a8a6cacc489ac94c5bfacb8448bdf407e4b4378
 public class JwtService : IJwtService
 {
     private readonly IConfiguration _config;

@@ -54,6 +54,7 @@ public class AuthService
         };
     }
 
+    // ❌ Aqui tengo que ver las contraseñas para HASH
     public async Task<TokenResponseDto?> RegisterAsync(RegisterDto dto)
     {
         var email = (dto.Email ?? string.Empty).Trim().ToLowerInvariant();
@@ -67,7 +68,7 @@ public class AuthService
         var usuario = new Usuario
         {
             Email = email,
-            // ✅ IMPORTANTÍSIMO: guarda el hash con password TRIM
+            // ✅ IMPORTANTEEEE: guarda el hash con password TRIM
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(passRaw.Trim()),
             IdPersona = dto.IdPersona,
             IdRol = dto.IdRol,
@@ -77,7 +78,8 @@ public class AuthService
 
         var creado = await _usuarioRepo.CrearAsync(usuario);
 
-        // ✅ Re-cargar desde repo para traer Rol con Include(u => u.Rol)
+        // ✅ Recargar desde repo para traer Rol con Include(u => u.Rol)
+        // ❔ Revisar aun y Pregunatarle a LES!
         var creadoConRol = await _usuarioRepo.GetByIdAsync(creado.Id) ?? creado;
 
         var token = _jwtService.GenerarToken(creadoConRol);

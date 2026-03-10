@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ADE.Seguridad.Application.DTOs;
+
+// ❔ Preguntarle a LES!
 public class LoginDto
 {
     public string Email { get; set; } = string.Empty;
@@ -20,6 +22,7 @@ public class TokenResponseDto
     public DateTime Expiracion { get; set; }
 }
 
+// ❔ Preguntarle a LES!
 public class RegisterDto
 {
     public string Email { get; set; } = string.Empty;

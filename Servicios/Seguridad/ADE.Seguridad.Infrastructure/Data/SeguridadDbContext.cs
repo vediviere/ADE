@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace ADE.Seguridad.Infrastructure.Data;
 
+// ❔❔❔❔ PREGUNTAR SOBRE TODO EL SCAFOLDING! ❔❔❔❔❔
+
 public class SeguridadDbContext : DbContext
 {
     public SeguridadDbContext(DbContextOptions<SeguridadDbContext> options) : base(options) { }
@@ -43,6 +45,7 @@ public class SeguridadDbContext : DbContext
              .HasForeignKey(u => u.IdRol);
         });
 
+        // ❔ Falta un rol? - preguntarle a LES! - ESTO ESTA MAL!!! LO DEBO CORREGIR 10/03/26
         modelBuilder.Entity<Rol>().HasData(
             new Rol { Id = 1, Nombre = "ADMIN" },
             new Rol { Id = 2, Nombre = "DOCENTE" },

@@ -1,13 +1,10 @@
 ﻿using ADE.Seguridad.Application.Interfaces;
 using ADE.Seguridad.Application.Services;
-using ADE.Seguridad.Domain.Entities;
-using ADE.Seguridad.Infrastructure.Data;
 using ADE.Seguridad.Infrastructure.Data.Scaffold;
 using ADE.Seguridad.Infrastructure.Repositories;
 using ADE.Seguridad.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -24,6 +21,8 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+// ❌❌❌ CAMBIAR - REVISAR "SeguridadDB" ❌❌❌
 builder.Services.AddDbContext<AdeDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SeguridadDb"));
@@ -54,7 +53,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             // ✅ IMPORTANTE: decirle a ASP.NET cuál claim es "rol"
             RoleClaimType = System.Security.Claims.ClaimTypes.Role,
 
-            // (Opcional recomendado) cuál claim usar como Name
+            // Cuál claim usar como Name -- LUEGO LO ARREGLO BIEN
             NameClaimType = System.Security.Claims.ClaimTypes.Email,
 
             ClockSkew = TimeSpan.Zero
