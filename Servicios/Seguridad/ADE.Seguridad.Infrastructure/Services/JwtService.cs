@@ -8,6 +8,9 @@ using System.Text;
 
 namespace ADE.Seguridad.Infrastructure.Services;
 
+
+// ❔❔❔❔ RECONFIGURACION DE TOKENS ❔❔❔❔❔ - SE NECESITA PENSARLO MEJOR
+
 public class JwtService : IJwtService
 {
     private readonly IConfiguration _config;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ADE.Seguridad.Domain.Entities;
 
+// ❔ Dudas Existenciales - Preguntar
 public class Usuario
 {
     public int Id { get; set; }

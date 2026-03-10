@@ -18,6 +18,8 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
+
+    // EndPoint de LOGIN -- Cambiar los mensajes
     [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
@@ -33,6 +35,8 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
+
+    //REFACTORIZAR EndPoint de Registrar -- Cambiar los mensajes y refactorizar 
     [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
@@ -50,7 +54,7 @@ public class AuthController : ControllerBase
         return Created("", result);
     }
 
-
+    // ❔ EndPoint de prueba -- Eliminar o modificar despues
     [Authorize]
     [HttpGet("me")]
     public IActionResult Me()
@@ -59,6 +63,7 @@ public class AuthController : ControllerBase
         return Ok(claims);
     }
 
+    // ❔ EndPoint de prueba -- Eliminar o modificar despues
     [Authorize(Roles = "ADMIN")]
     [HttpGet("admin-only")]
     public IActionResult AdminOnly()
@@ -66,6 +71,7 @@ public class AuthController : ControllerBase
         return Ok("✅ Acceso concedido: ADMIN");
     }
 
+    // ❔ EndPoint de prueba -- Eliminar o modificar despues
     [Authorize(Roles = "DOCENTE")]
     [HttpGet("docente-only")]
     public IActionResult DocenteOnly()
@@ -73,6 +79,7 @@ public class AuthController : ControllerBase
         return Ok("✅ Acceso concedido: DOCENTE");
     }
 
+    // ❔ EndPoint de prueba -- Eliminar despues
     [Authorize(Roles = "ADMIN")]
     [HttpGet("debug/usuarios")]
     public async Task<IActionResult> DebugUsuarios([FromServices] SeguridadDbContext db)
