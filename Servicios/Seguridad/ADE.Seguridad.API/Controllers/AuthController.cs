@@ -126,41 +126,6 @@ public class AuthController : ControllerBase
     }
 
 
-    /*🐾🐾🐾🐾🐾🐾
-----------------------------------------------------------------------------
-ENDPOINT: REGISTER
-
-Este endpoint fue diseñado para registrar usuarios nuevos.
-
-IMPORTANTE:
-Actualmente el proyecto está trabajando con una BD existente (Ruta B),
-por lo que el registro puede estar deshabilitado temporalmente o requerir
-una implementación específica sobre la tabla real de personas.
-
-Si se habilita completamente, el flujo sería:
-1. Recibir datos del nuevo usuario
-2. Validar duplicados
-3. Crear usuario en la fuente de datos real
-4. Generar token opcionalmente
-----------------------------------------------------------------------------
-🐾🐾🐾🐾🐾🐾*/
-    [AllowAnonymous]
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto dto)
-    {
-        return StatusCode(501, new { mensaje = "Registro deshabilitado temporalmente. Solo Login (Ruta B)." });
-
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        var result = await _authService.RegisterAsync(dto);
-
-        if (result == null)
-            return Conflict(new { mensaje = "El email ya está registrado" });
-
-        return Created("", result);
-    }
-
     // ❔ EndPoint de prueba -- Eliminar o modificar despues
     /* 🐾🐾🐾🐾🐾🐾
     ----------------------------------------------------------------------------

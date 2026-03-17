@@ -15,11 +15,13 @@ namespace ADE.Seguridad.Infrastructure.Data.Scaffold;
 
 public partial class AdeDbContext : DbContext
 {
+    // 🐾🐾 Constructor que recibe opciones de configuración para el contexto 🐾🐾
     public AdeDbContext(DbContextOptions<AdeDbContext> options)
         : base(options)
     {
     }
 
+    // 🐾🐾 Representación de las tablas de la base de datos como DbSet<T> 🐾🐾
     public virtual DbSet<actividad_apoyo> actividad_apoyos { get; set; }
 
     public virtual DbSet<apoyo_docencium> apoyo_docencia { get; set; }

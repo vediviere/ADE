@@ -17,22 +17,29 @@ namespace ADE.Seguridad.Infrastructure.Repositories;
 
 public class UsuarioRepository : IUsuarioRepository
 {
+    // 🐾🐾 Traemos el contexto de la base de datos para hacer consultas 🐾🐾
     private readonly AdeDbContext _context;
 
+    // 🐾🐾 Inyectamos el contexto a través del constructor 🐾🐾
     public UsuarioRepository(AdeDbContext context)
     {
         _context = context;
     }
 
+    // 🐾🐾 Consulta la tabla "persona" para encontrar un usuario por su correo institucional 🐾🐾
     public async Task<Usuario?> GetByEmailAsync(string email)
     {
+        // 🐾🐾 Normalizamos el email para evitar problemas de mayúsculas, espacios, etc. 🐾🐾
         var normalized = (email ?? string.Empty).Trim().ToLowerInvariant();
 
+        // 🐾🐾 Buscamos la persona en la base de datos por su correo institucional 🐾🐾
         var p = await _context.personas
             .FirstOrDefaultAsync(x => x.correo_inst.Trim().ToLower() == normalized);
 
+        // 🐾🐾 Si no encontramos a nadie, devolvemos null 🐾🐾
         if (p == null) return null;
 
+        // 🐾🐾 Traducimos el id_rol a un nombre de rol legible 🐾🐾
         var rolNombre = p.id_rol switch
         {
             1 => "CARRERA",
@@ -44,6 +51,7 @@ public class UsuarioRepository : IUsuarioRepository
             _ => "USER"
         };
 
+        // 🐾🐾 Creamos un objeto Usuario del dominio con los datos de la persona encontrada 🐾🐾
         return new Usuario
         {
             Id = p.id_persona,
@@ -56,14 +64,17 @@ public class UsuarioRepository : IUsuarioRepository
         };
     }
 
+    // 🐾🐾 Consulta la tabla "persona" para encontrar un usuario por su ID 🐾🐾
     public async Task<Usuario?> GetByIdAsync(int id)
     {
+        // 🐾🐾 Buscamos la persona en la base de datos por su ID 🐾🐾
         var p = await _context.personas
             .FirstOrDefaultAsync(x => x.id_persona == id);
 
         if (p == null)
             return null;
 
+        // 🐾🐾 Traducimos el id_rol a un nombre de rol legible 🐾🐾
         var rolNombre = p.id_rol switch
         {
             1 => "CARRERA",
@@ -75,6 +86,7 @@ public class UsuarioRepository : IUsuarioRepository
             _ => "USER"
         };
 
+        // 🐾🐾 Creamos un objeto Usuario con los datos de la persona encontrada 🐾🐾
         return new Usuario
         {
             Id = p.id_persona,
@@ -91,29 +103,27 @@ public class UsuarioRepository : IUsuarioRepository
         };
     }
 
+    // 🐾🐾 Verifica si ya existe un usuario con el mismo correo institucional 🐾🐾
     public async Task<bool> ExisteEmailAsync(string email)
     {
+        // 🐾🐾 Normalizamos el email para la comparación 🐾🐾
         var normalized = (email ?? string.Empty).Trim().ToLowerInvariant();
 
         return await _context.personas
             .AnyAsync(p => p.correo_inst.Trim().ToLower() == normalized);
     }
 
+    // 🐾🐾 Actualiza el hash de la contraseña para un usuario específico 🐾🐾
     public async Task ActualizarPasswordHashAsync(int idPersona, string newHash)
     {
+        // 🐾🐾 Buscamos la persona en la base de datos por su ID 🐾🐾
         var persona = await _context.personas.FirstOrDefaultAsync(p => p.id_persona == idPersona);
         if (persona == null) return;
 
+        // 🐾🐾 Actualizamos el campo de contraseña con el nuevo hash 🐾🐾
         persona.contrasena = newHash;
         await _context.SaveChangesAsync();
     }
 
-    public Task<Usuario> CrearAsync(Usuario usuario)
-    {
-        throw new NotImplementedException(
-            "CrearAsync está deshabilitado en Ruta B (DB existente). " +
-            "Por ahora solo se permite Login contra adedb.persona. " +
-            "Si se decide permitir registro, se implementará insertando en adedb.persona."
-        );
-    }
+    // Falta implementar este metodo de creacion de usuario
 }

@@ -44,9 +44,6 @@ namespace ADE.Seguridad.Application.Interfaces
         //🐾🐾 Verifica si un correo ya existe en el sistema 🐾🐾
         Task<bool> ExisteEmailAsync(string email);
 
-        //🐾🐾 Crea un nuevo usuario 🐾🐾
-        Task<Usuario> CrearAsync(Usuario usuario);
-
         //🐾🐾 Actualiza el hash de la contraseña 🐾🐾
         Task ActualizarPasswordHashAsync(int idPersona, string newHash);
     }
